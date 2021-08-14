@@ -1,0 +1,296 @@
+<div class="container-fluid">
+        <h3 class="mt-1" style="font-weight: 800;">EMPLOYEE FORM</h3>
+
+        <form name="form" (ngSubmit)="f.form.valid && submitDetails()" #f="ngForm" novalidate>
+
+        <div class="row">
+            <div class="card mb-1" style="background-color: rgba(204, 11, 91, 0.384); max-height: 20px;">
+                <h5 class="text-white text-center"><b>PERSONAL INFORMATION</b></h5>
+            </div>
+                <div class="col-md-1">
+                    <h4>Full Name:</h4>
+                </div>
+
+                <mat-form-field class="col-md-4">
+                    <mat-label>Firstname</mat-label>
+                    <input matInput placeholder="Placeholder" name="firstname" [(ngModel)]="model.firstname" #firstname  required/>
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-4">
+                    <mat-label>Surname</mat-label>
+                    <input matInput placeholder="Placeholder" name="surname" [(ngModel)]="model.surname" #surname  required/>
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field class="col-md-3">
+                    <mat-label>Lastname</mat-label>
+                    <input matInput placeholder="Placeholder" name="lastname" [(ngModel)]="model.lastname" #lastname  required/>
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                </mat-form-field>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-1">
+                <h4>Address:</h4>
+            </div>
+            <mat-form-field class="col-md-3">
+                <mat-label>Street Address</mat-label>
+                <input matInput placeholder="Placeholder" name="streetAddress" [(ngModel)]="model.streetAddress" #streetAddress  required/>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-3">
+                <mat-label>State</mat-label>
+                <mat-select [(ngModel)]="model.state" name="state" #state  required>
+                  <mat-option *ngFor="let status of statesArray " [value]="status.Name">
+                    {{status.Name | uppercase}}
+                  </mat-option>
+                </mat-select>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-3">
+                <mat-label>City</mat-label>
+                <input matInput placeholder="Placeholder" name="city" [(ngModel)]="model.city">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-2">
+                <mat-label>ZIP Code</mat-label>
+                <input matInput placeholder="Placeholder"  name="zipcode" [(ngModel)]="model.zipcode" #zipcode  required/>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-1">
+                <h4>Contact:</h4>
+            </div>
+            <mat-form-field class="col-md-6">
+                <mat-label>Home Phone</mat-label>
+                <input matInput placeholder="Placeholder" name="homephone" [(ngModel)]="model.homephone" #homephone  required/>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-5">
+                <mat-label>Alternate Phone:</mat-label>
+                <input matInput placeholder="Placeholder" name="alternatephone" [(ngModel)]="model.alternatephone" #alternatephone  required/>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-1">
+                <h4>Email:</h4>
+            </div>
+            <mat-form-field class="col-md-7">
+                <mat-label>E-mail</mat-label>
+                <input matInput placeholder="Placeholder" name="email" [(ngModel)]="model.email" #email  required/>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+            
+            <mat-form-field color="accent" class="col-md-4">
+                <mat-label>Date of Birth</mat-label>
+                <input matInput [matDatepicker]="picker2" name="birthdate" [(ngModel)]="model.birthdate" #birthdate  required/>
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2 color="primary"></mat-datepicker>
+            </mat-form-field>
+       </div>
+
+       <div class="row mt-2">
+        <div class="col-md-1">
+            <h4>Marital:</h4>
+        </div>
+        <mat-form-field class="col-md-4">
+            <mat-label>Marital Status</mat-label>
+            <mat-select [(ngModel)]="model.maritalStatus" name="maritalStatus" #maritalStatus  required>
+              <mat-option *ngFor="let status of status" [value]="status.value">
+                {{status.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <mat-form-field class="col-md-4">
+            <mat-label>Spouse's Name</mat-label>
+            <input matInput placeholder="Placeholder" name="spousename" [(ngModel)]="model.spousename" #spousename [ngClass]="{ 'is-invalid': f.submitted && spousename.oninvalid }" required>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+            <mat-label>Spouse's work Phone</mat-label>
+            <input matInput placeholder="Placeholder" name="spousephone" [(ngModel)]="model.spousephone" #spousephone  required>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1">
+            <h4>Files:</h4>
+        </div>
+
+        <mat-form-field floatPlaceholder="never" class="col-md-5">
+            <input [hidden]="true" (change)="UploadCv($event)" type="file" name="filescv" [(ngModel)]="model.filescv" accept=".doc, .docx,.pdf" #cvSelect>
+            <input readonly matInput [(ngModel)]="cvName" name="cvName" placeholder="Upload CV..." required/>
+            <button *ngIf="this.filecv" (click)="this.filecv = null; this.cvName = null" matSuffix matTooltip="Remove selected file"
+                     type="button" color="warn" mat-icon-button>
+                    <mat-icon>close</mat-icon>
+                  </button>
+            <button matSuffix mat-icon-button (click)="cvSelect.click();"  matTooltip="Select a file">
+              <mat-icon>file_upload</mat-icon>
+            </button> 
+          </mat-form-field>
+
+          <mat-form-field floatPlaceholder="never" class="col-md-4">
+            <input [hidden]="true" (change)="onFileSelect($event)" type="file" name="profilepic" [(ngModel)]="model.profilepic" accept="image/gif, image/jpeg, image/png" #fileSelect>
+            <input readonly matInput [(ngModel)]="filename" name="filename" placeholder="Upload Picture..." required/>
+
+            <button *ngIf="this.base64File" (click)="this.base64File = null; this.filename = null" matSuffix matTooltip="Remove selected file"
+                     type="button" color="warn" mat-icon-button>
+                    <mat-icon>close</mat-icon>
+                  </button>
+            <button matSuffix mat-icon-button (click)="fileSelect.click();"  matTooltip="Select a file">
+              <mat-icon>file_upload</mat-icon>
+            </button> 
+          </mat-form-field>
+
+       <div class="col-md-2">
+        <img [src]="base64File" style="height: 100px; width: 100px; border-radius: 50%" alt="passport"> <br/>
+       </div>
+
+    </div>
+
+    <div class="row">
+        <div class="card mb-1" style="background-color: rgba(204, 11, 91, 0.384); max-height: 20px;">
+            <h5 class="text-white text-center"><b>JOB INFORMATION</b></h5>
+        </div>
+           
+            <mat-form-field class="col-md-4">
+                <mat-label>Job Title</mat-label>
+                <input matInput placeholder="Placeholder" [(ngModel)]="model.jobtitle" name="jobtitle" placeholder="jobtitle" #jobtitle  required/>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4">
+                <mat-label>Work Location</mat-label>
+                <input matInput placeholder="Placeholder" name="worklocation" [(ngModel)]="model.worklocation" #worklocation [ngClass]="{ 'is-invalid': f.submitted && worklocation.oninvalid }" required/>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-4">
+                <mat-label>Salary</mat-label>
+                <input matInput placeholder="Placeholder" name="salary" [(ngModel)]="model.salary" #salary [ngClass]="{ 'is-invalid': f.submitted && salary.oninvalid }" required>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+    </div>
+
+    <div class="row">
+
+            <mat-form-field class="col-md-6">
+                <mat-label>Work E-mail</mat-label>
+                <input matInput placeholder="Placeholder" name="workemail" [(ngModel)]="model.workemail" #workemail [ngClass]="{ 'is-invalid': f.submitted && workemail.oninvalid }" required>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-6">
+                <mat-label>EmployeeID</mat-label>
+                <input matInput readonly placeholder="Placeholder" name="employeeID" [(ngModel)]="model.randomID" #employeeID  required>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+    </div>
+
+    <div class="row">
+
+        <mat-form-field class="col-md-6">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="Placeholder" name="password" [(ngModel)]="model.password" #password  required>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+            <mat-label>Re-type Password</mat-label>
+            <input type="password" matInput placeholder="Placeholder" name="password_confirmation" [(ngModel)]="model.password_confirmation" #password_confirmation  required/>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <div class="card mb-1" style="background-color: rgba(204, 11, 91, 0.384); max-height: 20px;">
+            <h5 class="text-white text-center"><b>EMERGENCY CONTACT INFORMATION</b></h5>
+        </div>
+           
+            <div class="col-md-1">
+                <h4>Full Name:</h4>
+            </div>
+            <mat-form-field class="col-md-6">
+                <mat-label>Firstname</mat-label>
+                <input matInput placeholder="Placeholder" name="firstnameE" [(ngModel)]="model.firstnameE" #firstnameE  required>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-5">
+                <mat-label>Surname</mat-label>
+                <input matInput placeholder="Placeholder" name="lastnameE" [(ngModel)]="model.lastnameE" #lastnameE  required>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+    </div>
+
+    <div class="row">
+            <div class="col-md-1">
+                <h4>Address:</h4>
+            </div>
+            <mat-form-field class="col-md-3">
+                <mat-label>Street Address</mat-label>
+                <input matInput placeholder="Placeholder" name="addressE" [(ngModel)]="model.addressE" #addressE  required>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-3">
+                <mat-label>State</mat-label>
+                <mat-select [(ngModel)]="model.stateE" #stateE  name="stateE" required>
+                  <mat-option *ngFor="let status of statesArray" [value]="status.Name">
+                    {{status.Name | uppercase}}
+                  </mat-option >
+                </mat-select>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-3">
+                <mat-label>City</mat-label>
+                <input matInput placeholder="Placeholder" name="cityE" [(ngModel)]="model.cityE" #cityE  required>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field class="col-md-2">
+                <mat-label>ZIP Code</mat-label>
+                <input matInput placeholder="Placeholder" name="zipcodeE" [(ngModel)]="model.zipcodeE" #zipcodeE  required>
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1">
+            <h4>Contact:</h4>
+        </div>
+        <mat-form-field class="col-md-5">
+            <mat-label>Primary phone</mat-label>
+            <input matInput placeholder="Placeholder" name="phoneE" [(ngModel)]="model.phoneE" #phoneE  required>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+            <mat-label>Relationship</mat-label>
+            <input matInput placeholder="Placeholder" name="relationship" [(ngModel)]="model.relationship" #relationship  required>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <div class="row mx-auto text-center">
+        <button mat-raised-button color="accent" type="submit" [disabled]="!f.valid" class="col-md-10 m-4 text-white" style="background-color: rgb(139, 2, 59);">Signup Manager</button>
+    </div>
+
+
+    </form>
+    
+</div>

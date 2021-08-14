@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row mx-auto">
+        <div class="col-md-6 mx-auto mt-5 text-center">
+            <mat-progress-bar mode="indeterminate" *ngIf="showprogress" style="border-radius: 10px;"></mat-progress-bar>
+             <mat-card class="shadow" style="background-color: #55535355;">
+                  <h3 style="font-weight: 800;" class="text-center">ARICHEN MANAGER</h3>
+                <form class="example-form" name="form" (ngSubmit)="f.form.valid && submitDetails()" #f="ngForm" novalidate>
+
+                    <div class="row m-3">
+                        <mat-form-field class="example-full-width" class="mb-4 col-md-12" appearance="fill">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput placeholder="" name="password" value="" [(ngModel)]="model.email">
+                          </mat-form-field>
+
+                        <mat-form-field class="example-full-width" class="mb-4 col-md-12" appearance="fill">
+                            <mat-label>Password</mat-label>
+                            <input [type]="password" name="password" [(ngModel)]="model.password" matInput placeholder="" value="">
+                            <mat-icon matSuffix (click)="onClick()">
+                                <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                                <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                            </mat-icon>
+                        </mat-form-field>
+
+                        <button mat-raised-button id="login" class="col-md-12" style="background-color: #424242;" [disabled]="!f.valid">Login</button>
+
+                     </div>
+
+                </form>
+             </mat-card>
+        </div>
+    </div>
+</div>
